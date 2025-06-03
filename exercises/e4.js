@@ -6,9 +6,15 @@ import { data } from "../data/data";
 
 export function getPlanetsWithLowGravity(data) {
   // Your code goes here...
+  var planetNames = data.planets
+    .filter(function (lessTen) {
+      return lessTen.gravity < 10;
+    })
+    .map(function (planet) {
+      return planet.name;
+    });
+  return planetNames;
 }
-
-
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-4"
