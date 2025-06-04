@@ -9,13 +9,30 @@ import { maxBy } from "./e17";
 export function getGreatestDiscoveryYear(data) {
   // Your code goes here...
   // feel free to import your `maxBy` or `minBy` methods from previous lessons
-  // I cannot wrap my head around how to iterate through the objects by year and getting the sums for all the discoveries
-  // for each year.
-  // I am thinking getting the sum of times the year has discovered an asteroid by filtering by years.
-  // Then, using reduce() to get the sums and use the maxBy() to point out which is the highest discovery and point the
-  // year associated with the sum.
-  // However, this feels beyond complex to plan with array methods.
-  // If I can get any pointers, tips, or guides on how to approach this exericese, I can complete the assignment fully.
+  var temp = 0;
+  var greatestYear = 0;
+  
+  // made array with discoveryYear
+  var arrayYears = data.asteroids.map(function(year) {
+    return year.discoveryYear;
+  });
+
+  // iterate each year in arrayYears
+  var yearCompare = arrayYears.map(function(currYear) {
+    // creates a new array using the iterated year and checks through the arrayYears again for matching year
+    var test = arrayYears.filter(function(val) {
+      return val === currYear;      
+    });
+    // outputs an array of arrays with its elements as the same year to each other
+    return test;
+  });
+  // arrayYears is viewed as yearCompare in this scope
+
+  // checking each array of yearCompare which has the most discoveryYear by the arrays' length
+  // outputs as an array of all elements with same year
+  greatestYear = maxBy(yearCompare, (year) => year.length);
+  // points to first element to output the year properly
+  return greatestYear[0];
 }
 
 // === TEST YOURSELF ===
